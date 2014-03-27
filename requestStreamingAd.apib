@@ -12,49 +12,54 @@ The Mobile API gives the Vungle SDKs access to the Vungle Ad Server for serving 
 
     
         { 
-            "pubAppId": "VungleApp", 
-            "isu": "123456", 
-            "deviceInfo": 
+            pubAppId: "VungleApp", 
+            isu: 123456,
+            campaignId: "12ab3d5f"
+            deviceInfo: 
+            {
+                osVersion: 3.2,
+                platform: "iOS",
+                dim: 
                 {
-                    "osVersion": "3.2",
-                    "platform": "iOS",
-                    "dim": 
-                        {
-                            "width": "480",
-                            "height": "320"
-                        }
-                    }
+                    width: 480,
+                    height: 320
                 }
+            }
         }
 
 
 + Response 200 (application/json)
+
         {
-            should_stream: true,
+            shouldStream: true,
             version: 2.0,
-            ad: {
+            ad: 
+            {
                 id: 12345,
-                title: VAST ad,
-                source: String,
-             }
+                title: "VAST ad",
+                source: "VAST source",
+            }
             forceView: true,
             showClose: 2,
-            cta_overlay: {
+            cta_overlay:
+            {
                 enabled: true,
                 show_onclick: true,
                 time_show: 1,
                 time_enabled: 2,
                 click_area: 160, 
             }
-            tpat: {
-                play_percentage: {
+            tpat:
+            {
+                play_percentage:
+                {
                     [
                         checkpoint: .25, 
                         urls: 
-                            [
-                                "http://trackingurl.com", 
-                                "http://trackingurl2.com"
-                            ]
+                        [
+                            "http://trackingurl.com", 
+                            "http://trackingurl2.com"
+                        ]
                     ],
                 },
                 mute: 
@@ -69,17 +74,17 @@ The Mobile API gives the Vungle SDKs access to the Vungle Ad Server for serving 
                 pause: [],
                 resume: [],
                 video_click: 
-                    [
-                        "http://trackingurl3.com"
-                    ],
+                [
+                    "http://trackingurl3.com"
+                ],
                 video_close: 
-                    [
-                        "http://trackingurl4.com"
-                    ],
+                [
+                    "http://trackingurl4.com"
+                ],
                 error: 
-                    [
-                        "http://trackingurlerror.com"
-                    ]
+                [
+                    "http://trackingurlerror.com"
+                ]
             }   
             duration_seconds: 15,
             url: "http://streamingvideo.mp4",
