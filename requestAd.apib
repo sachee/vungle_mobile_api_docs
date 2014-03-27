@@ -6,7 +6,51 @@ The Mobile API gives the Vungle SDKs access to the Vungle Ad Server for serving 
 
 # Group Requesting Ads
 ## Requesting an Ad [/requestAd]
-
+<strong>Sleep Response (SDK) Meanings</strong>
+<table width: 100%; margin: 12px 0 0 0; >
+    <tbody>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: red;">60</td>
+            <td>unfilled request</td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: red;">305</td>
+            <td>unknown app</td>
+        </tr>
+        <tr>
+            <td style="border-top: 0px;"></td>
+            <td style="border-top: 0px;">no app</td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: red;">350</td>
+            <td>no active campaigns</td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: red;">1800</td>
+            <td>filters eliminated all options</td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: red;">3600</td>
+            <td>inactive app</td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: red;">3601</td>
+            <td>network mismatch</td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: red;">86400</td>
+            <td>cross promotional app</td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: red;">86401</td>
+            <td>OS mismatch</td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: red;">172800</td>
+            <td>non-publisher app</td>
+        </tr>
+    </tbody>
+</table>
 ### Requesting an Ad [POST]
 + Request (application/json)
     
@@ -86,6 +130,12 @@ The Mobile API gives the Vungle SDKs access to the Vungle Ad Server for serving 
             chk: "26d2ce2b58a2d4614271bef25cec4afb",
             retryCount: 3,
             asyncThreshold: 40
+        }
+
++ Response 200 (application/json)
+        {
+
+        
         }
 
 ## Requesting a Streaming Ad [/requestStreamingAd]
