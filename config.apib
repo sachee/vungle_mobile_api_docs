@@ -1,0 +1,19 @@
+# Group Requesting SDK Configuration Settings
+## Requesting SDK Config[/config]
+
+### Requesting SDK Config [POST]
++ Request (application/json)
+    
+        { 
+            pubAppId: "VungleApp"
+        }
+
+
++ Response 200 (application/json)
+
+        { 
+            optIn: true,
+            threshold: 500,
+            updateDelay: 3600,
+            connection: 'wifi'
+        }
