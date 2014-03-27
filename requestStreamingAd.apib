@@ -1,0 +1,92 @@
+FORMAT: 1A
+HOST: http://www.vungle.com/api/v1
+
+# Mobile API
+The Mobile API gives the Vungle SDKs access to the Vungle Ad Server for serving all of Vungle's Ads.
+
+# Group Streaming
+## Requesting a Streaming Ad [/requestStreamingAd]
+
+### Requesting a Streaming Ad [POST]
++ Request (application/json)
+
+    
+        { 
+            "pubAppId": "VungleApp", 
+            "isu": "123456", 
+            "deviceInfo": 
+                {
+                    "osVersion": "3.2",
+                    "platform": "iOS",
+                    "dim": 
+                        {
+                            "width": "480",
+                            "height": "320"
+                        }
+                    }
+                }
+        }
+
+
++ Response 200 (application/json)
+        {
+            should_stream: true,
+            version: 2.0,
+            ad: {
+                id: 12345,
+                title: VAST ad,
+                source: String,
+             }
+            forceView: true,
+            showClose: 2,
+            cta_overlay: {
+                enabled: true,
+                show_onclick: true,
+                time_show: 1,
+                time_enabled: 2,
+                click_area: 160, 
+            }
+            tpat: {
+                play_percentage: {
+                    [
+                        checkpoint: .25, 
+                        urls: 
+                            [
+                                "http://trackingurl.com", 
+                                "http://trackingurl2.com"
+                            ]
+                    ],
+                },
+                mute: 
+                [
+                    "http://trackingurl.com"
+                ],
+                unmute: 
+                [
+                    "http://trackingurl.com", 
+                    "http://trackingurl2.com"
+                ],
+                pause: [],
+                resume: [],
+                video_click: 
+                    [
+                        "http://trackingurl3.com"
+                    ],
+                video_close: 
+                    [
+                        "http://trackingurl4.com"
+                    ],
+                error: 
+                    [
+                        "http://trackingurlerror.com"
+                    ]
+            }   
+            duration_seconds: 15,
+            url: "http://streamingvideo.mp4",
+            height: 600,
+            width: 400,
+            encoding: "video/mp4",
+            bitrate: 500,
+            delivery_method: "streaming",
+            callToActionDestUrl: "http"//calltoactionurl.com"
+        }
