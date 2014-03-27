@@ -87,3 +87,90 @@ The Mobile API gives the Vungle SDKs access to the Vungle Ad Server for serving 
             retryCount: 3,
             asyncThreshold: 40
         }
+
+## Requesting a Streaming Ad [/requestStreamingAd]
+
+### Requesting a Streaming Ad [POST]
++ Request (application/json)
+
+        { 
+            pubAppId: "VungleApp", 
+            isu: 123456,
+            campaignId: "12ab3d5f"
+            deviceInfo: 
+            {
+                osVersion: 3.2,
+                platform: "iOS",
+                dim: 
+                {
+                    width: 480,
+                    height: 320
+                }
+            }
+        }
+
+
++ Response 200 (application/json)
+
+        {
+            id: "533481c9106d238b2a000008",
+            campaign: "533481c8106d238b2a000007|5333340b1884e33d25000742|v2-pub-eRPM",
+            callToActionUrl: "http://thirdpartystreaming.com/tracking",
+            app_id: "STREAM",
+            countdown: 4,
+            showClose: 9999,
+            cta_overlay:
+            {
+                click_area: 160,
+                time_enabled: 1,
+                time_show: 1,
+                show_onclick: true,
+                enabled: true
+            },
+            expiry: 1398628799,
+            delay: 0,
+            shouldStream: true,
+            url: "http://thirdpartystreaming.com/video.mp4",
+            videoWidth: 400,
+            videoHeight: 300,
+            tpat:
+            {
+                play_percentage:
+                {
+                    [
+                        checkpoint: .25, 
+                        urls: 
+                        [
+                            "http://trackingurl.com", 
+                            "http://trackingurl2.com"
+                        ]
+                    ],
+                },
+                mute: 
+                [
+                    "http://trackingurl.com"
+                ],
+                unmute: 
+                [
+                    "http://trackingurl.com", 
+                    "http://trackingurl2.com"
+                ],
+                pause: [],
+                resume: [],
+                video_click: 
+                [
+                    "http://trackingurl3.com"
+                ],
+                video_close: 
+                [
+                    "http://trackingurl4.com"
+                ],
+                error: 
+                [
+                    "http://trackingurlerror.com"
+                ]
+            }, 
+            chk: "592e45a363cab24e15d97da1933f1f7e",
+            retryCount: 3,
+            asyncThreshold: 40 
+        }
