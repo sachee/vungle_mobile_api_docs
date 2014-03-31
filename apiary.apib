@@ -1,0 +1,476 @@
+FORMAT: 1A
+HOST: http://www.vungle.com/api/v1
+
+# Mobile API
+The Mobile API gives the Vungle SDKs access to the Vungle Ad Server for serving all of Vungle"s Ads.
+
+# Group Requesting Ads
+## Requesting an Ad [/requestAd]
+
+<table width: 100%; margin: 12px 0 0 0; >
+    <tbody>
+    <strong>Sleep Response (SDK) Meanings</strong>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: red;">60</td>
+            <td>unfilled request</td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: red;">305</td>
+            <td>unknown app</td>
+        </tr>
+        <tr>
+            <td style="border-top: 0px;"></td>
+            <td style="border-top: 0px;">no app</td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: red;">350</td>
+            <td>no active campaigns</td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: red;">1800</td>
+            <td>filters eliminated all options</td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: red;">3600</td>
+            <td>inactive app</td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: red;">3601</td>
+            <td>network mismatch</td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: red;">86400</td>
+            <td>cross promotional app</td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: red;">86401</td>
+            <td>OS mismatch</td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: red;">172800</td>
+            <td>non-publisher app</td>
+        </tr>
+    </tbody>
+</table>
+
+<table>
+    <tbody>
+    <strong>Response Parameters</strong>
+        
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">id
+            </td>
+            <td><em>identifier of the impression</em>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">campaign
+            </td>
+            <td><em>campaign id, creative id, and selector bucket (that was used to choose ad), all seperated by '|'</em>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">callToActionUrl
+            </td>
+            <td><em>url to go to when CTA is clicked</em>
+            </td>
+        </tr>
+            <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">size
+            </td>
+            <td><em>how large the video is (in KB)</em>
+            </td>
+        </tr>
+        </tr>
+            <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">preBundle
+            </td>
+            <td><em>URL location of the pre-bundle</em>
+            </td>
+        </tr>
+        </tr>
+            <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">postBundle
+            </td>
+            <td><em>URL location of the post-bundle</em>
+            </td>
+        </tr>
+        </tr>
+            <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">callToActionDest
+            </td>
+            <td><em>URL to go to in the background after a CTA</em>
+            </td>
+        </tr>
+        </tr>
+            <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">app_id
+            </td>
+            <td><em>identifier for the app</em>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">countdown
+            </td>
+            <td><em>number of seconds before ad can be skipped</em>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">showClose
+            </td>
+            <td><em>number of seconds before the close button is displayed (9999 forces a view)</em>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">cta_overlay
+            </td>
+            <td><em>an overlay of buttons that can be configured to display when clicked or after a number of seconds</em>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">expiry
+            </td>
+            <td>when the ad expires (no longer should be played)
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">delay
+            </td>
+            <td><em>number of seconds to wait before playing another ad</em>
+            </td
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">url
+            </td>
+            <td><em>the streaming url used to retrieve streaming video</em>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">videoWidth
+            </td>
+            <td><em>width in pixels of the video</em>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">videoHeight
+            </td>
+            <td><em>height in pixels of the video</em>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">tpat
+            </td>
+            <td><em>list of urls to go to after certain events are triggered (percentage through video, close button is clicked, etc.)</em>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">retryCount
+            </td>
+            <td><em>how many times to retry if the request fails</em>
+        </tr>
+    </tbody>
+</table>
+### Requesting an Ad [POST]
++ Request (application/json)
+    
+        { 
+            pubAppId: "VungleApp", 
+            isu: 123456,
+            deviceInfo: 
+            {
+                osVersion: 3.2,
+                platform: "iOS",
+                dim: 
+                {
+                    width: 480,
+                    height: 320
+                }
+            }
+        }
+
+
++ Response 200 (application/json)
+
+        { 
+            videoWidth: 480,
+            videoHeight: 320,
+            url: "http://cds.g8j8b9g6.hwcdn.net/zen/sounfixpromo-480x320-Q2.mp4",
+            size: 1211293,
+            showClose: 4,
+            preBundle:"http://cds.g8j8b9g6.hwcdn.net/bundles/4f46ecbe3d7e73055e0001fa-3.zip",
+            postBundle: "http://cds.g8j8b9g6.hwcdn.net/bundles/4f46ecbe3d7e73055e0001fa-4.zip",
+            md5: "421c55283329e6c4446edb75bd49d589",
+            delay: 3,
+            cta_overlay:
+            {     
+                enabled: false,
+                show_onclick: true,
+                time_show: 5,
+                time_enabled: 10,
+                click_area: 1.2 
+            },
+            countdown: 4,
+            campaign: "cf630b31bbec9039199aca5f|a8d4cc79ad977810b9d9388a|test",
+            callToActionUrl: "http://itunes.apple.com/us/app/feed-the-rat/id531867069?mt=8",
+            tpat:
+            {
+                play_percentage:
+                {
+                    [
+                        checkpoint: .25, 
+                        urls: 
+                        [
+                            "http://trackingurl.com", 
+                            "http://trackingurl2.com"
+                        ]
+                    ],
+                },
+                mute: 
+                [
+                    "http://trackingurl.com"
+                ],
+                unmute: 
+                [
+                    "http://trackingurl.com", 
+                    "http://trackingurl2.com"
+                ],
+                video_click: 
+                [
+                    "http://trackingurl3.com"
+                ],
+                video_close: 
+                [
+                    "http://trackingurl4.com"
+                ],
+            }, 
+            callToActionDest: "http://itunes.apple.com/us/app/feed-the-rat/id531867069?mt=8",
+            app_id: "ios_vungle_Test2",
+            expiry: 1395964800,
+            id: "53348015fca24d672a000007",
+            chk: "26d2ce2b58a2d4614271bef25cec4afb",
+            retryCount: 3,
+            asyncThreshold: 40
+        }
+
+## Requesting a Streaming Ad [/requestStreamingAd]
+<table>
+    <tbody>
+    <strong>Response Parameters</strong>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">shouldStream
+            </td>
+            <td><em>whether or not the SDK should stream an ad</em>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">id
+            </td>
+            <td><em>identifier of the impression</em>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">campaign
+            </td>
+            <td><em>campaign id, creative id, and selector bucket (that was used to choose ad), all seperated by '|'</em>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">callToActionUrl
+            </td>
+            <td><em>url to go to when CTA is clicked</em>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">countdown
+            </td>
+            <td><em>number of seconds before ad can be skipped</em>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">showClose
+            </td>
+            <td><em>number of seconds before the close button is displayed (9999 forces a view)</em>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">cta_overlay
+            </td>
+            <td><em>an overlay of buttons that can be configured to display when clicked or after a number of seconds</em>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">expiry
+            </td>
+            <td>when the ad expires (no longer should be played)
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">delay
+            </td>
+            <td><em>number of seconds to wait before playing another ad</em>
+            </td
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">url
+            </td>
+            <td><em>the streaming url used to retrieve streaming video</em>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">videoWidth
+            </td>
+            <td><em>width in pixels of the video</em>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">videoHeight
+            </td>
+            <td><em>height in pixels of the video</em>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">tpat
+            </td>
+            <td><em>list of urls to go to after certain events are triggered (percentage through video, close button is clicked, etc.)</em>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">retryCount
+            </td>
+            <td><em>how many times to retry if the request fails</em>
+        </tr>
+    </tbody>
+</table>
+  
+### Requesting a Streaming Ad [POST]
++ Request (application/json)
+
+    + Body
+
+            { 
+                pubAppId: "VungleApp", 
+                isu: 123456,
+                campaignId: "12ab3d5f"
+                deviceInfo: 
+                {
+                    osVersion: 3.2,
+                    platform: "iOS",
+                    dim: 
+                    {
+                        width: 480,
+                        height: 320
+                    }
+                }
+            }
+
+
++ Response 200 (application/json)
+
+        {
+            id: "533481c9106d238b2a000008",
+            campaign: "533481c8106d238b2a000007|5333340b1884e33d25000742|v2-pub-eRPM",
+            callToActionUrl: "http://thirdpartystreaming.com/tracking",
+            app_id: "STREAM",
+            countdown: 4,
+            showClose: 9999,
+            cta_overlay:
+            {
+                click_area: 160,
+                time_enabled: 1,
+                time_show: 1,
+                show_onclick: true,
+                enabled: true
+            },
+            expiry: 1398628799,
+            delay: 0,
+            shouldStream: true,
+            url: "http://thirdpartystreaming.com/video.mp4",
+            videoWidth: 400,
+            videoHeight: 300,
+            tpat:
+            {
+                play_percentage:
+                {
+                    [
+                        checkpoint: .25, 
+                        urls: 
+                        [
+                            "http://trackingurl.com", 
+                            "http://trackingurl2.com"
+                        ]
+                    ],
+                },
+                mute: 
+                [
+                    "http://trackingurl.com"
+                ],
+                unmute: 
+                [
+                    "http://trackingurl.com", 
+                    "http://trackingurl2.com"
+                ],
+                pause: [],
+                resume: [],
+                video_click: 
+                [
+                    "http://trackingurl3.com"
+                ],
+                video_close: 
+                [
+                    "http://trackingurl4.com"
+                ],
+                error: 
+                [
+                    "http://trackingurlerror.com"
+                ]
+            }, 
+            chk: "592e45a363cab24e15d97da1933f1f7e",
+            retryCount: 3,
+            asyncThreshold: 40 
+        }
+
+
+
+# Group SDK Config
+## Requesting SDK Config [/config]
+<table>
+    <tbody>
+        <strong>Response Parameters</strong>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">optIn
+            </td>
+            <td><em>whether or not the publisher wants to opt in to the Exchange</em>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">threshold
+            </td>
+            <td><em>number of milliseconds to wait for the streaming request</em>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">updateDelay
+            </td>
+            <td><em>number of seconds to wait before requesting the config</em>
+        </tr>
+        <tr>
+            <td style="width: 25%; vertical-align: top; color: darkblue;">connection
+            </td>
+            <td><em>the required connection to make a streaming request</em>
+        </tr>
+    </tbody>
+</table>
+### Requesting SDK Config [POST]
++ Request (application/json)
+    
+        { 
+            pubAppId: "VungleApp"
+        }
+
+
++ Response 200 (application/json)
+
+        { 
+            optIn: true,
+            threshold: 500,
+            updateDelay: 3600,
+            connection: 'wifi'
+        }
