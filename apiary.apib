@@ -172,21 +172,38 @@ The Mobile API gives the Vungle SDKs access to the Vungle Ad Server for serving 
 </table>
 ### Requesting an Ad [POST]
 + Request (application/json)
-    
-        { 
-            pubAppId: "VungleApp", 
-            isu: 123456,
-            deviceInfo: 
-            {
-                osVersion: 3.2,
-                platform: "iOS",
-                dim: 
-                {
-                    width: 480,
-                    height: 320
-                }
-            }
+
+        {
+            isu: "ed01197e17326d5c",
+            pubAppId: "VungleApp",
+            deviceInfo: {
+                dim: {
+                    height: 1776,
+                    width: 1080
+                },
+                demo: {
+                    location: {
+                        long: 0,
+                        lat: 0
+                    },
+                    gender: "unknown",
+                    age: 0
+                },
+                platform: "android",
+                model: "LGE,Nexus 5",
+                connection: "wifi",
+                osVersion: "4.4.2",
+                networkOperator: "T-Mobile",
+                volume: 0.13333333333333333,
+                soundEnabled: true,
+                serial: "0304b29e307b6fc8",
+                isSdCardAvailable: 1,
+                adobeAir: false,
+                corona: false
+             }
         }
+    
+
 
 
 + Response 200 (application/json)
@@ -347,20 +364,35 @@ The Mobile API gives the Vungle SDKs access to the Vungle Ad Server for serving 
 
     + Body
 
-            { 
-                pubAppId: "VungleApp", 
-                isu: 123456,
-                campaignId: "12ab3d5f"
-                deviceInfo: 
-                {
-                    osVersion: 3.2,
-                    platform: "iOS",
-                    dim: 
-                    {
-                        width: 480,
-                        height: 320
-                    }
-                }
+            {
+                isu: "ed01197e17326d5c",
+                pubAppId: "VungleApp",
+                campaignId: "1123f2cd",
+                deviceInfo: {
+                    dim: {
+                        height: 1776,
+                        width: 1080
+                    },
+                    demo: {
+                        location: {
+                            long: 0,
+                            lat: 0
+                        },
+                        gender: "unknown",
+                        age: 0
+                    },
+                    platform: "android",
+                    model: "LGE,Nexus 5",
+                    connection: "wifi",
+                    osVersion: "4.4.2",
+                    networkOperator: "T-Mobile",
+                    volume: 0.13333333333333333,
+                    soundEnabled: true,
+                    serial: "0304b29e307b6fc8",
+                    isSdCardAvailable: 1,
+                    adobeAir: false,
+                    corona: false
+                 }
             }
 
 
